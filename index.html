@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OUR DIARY</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            perspective: 1300px;
+            font: 16px/1.4 sans-serif;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #ffccd5, #ffb6c1);
+            color: #880e4f;
+        }
+
+        .book {
+            display: flex;
+            margin: auto;
+            width: 460px;
+            /* slightly wider */
+            height: 580px;
+            /* a bit taller */
+            pointer-events: none;
+            transform-style: preserve-3d;
+            transition: translate 1.3s;
+            translate: calc(min(var(--c), 1) * 60%) 0%;
+        }
+
+        .page {
+            --thickness: 7;
+            flex: none;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            pointer-events: all;
+            user-select: none;
+            transform-style: preserve-3d;
+            border: 1px solid #c2185b;
+            transform-origin: left center;
+            transition:
+                transform 1.3s ease-in-out,
+                rotate 1.3s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 90ms);
+            translate: calc(var(--i) * -100%) 0px 0px;
+            transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 1px)));
+            rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+        }
+
+        .front,
+        .back {
+            flex: none;
+            width: 100%;
+            height: 100%;
+            padding: 2.8rem;
+            backface-visibility: hidden;
+            translate: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .front {
+            background-image: url('10.jpg');
+        }
+
+        .back {
+            background-image: url('11.jpg');
+            translate: -100% 0;
+            rotate: 0 1 0 180deg;
+        }
+
+        img,
+        .gif {
+            max-width: 85%;
+            max-height: 55%;
+            object-fit: contain;
+            margin: 1.2rem;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(194, 24, 91, 0.35);
+        }
+
+        .gif {
+            width: 90%;
+        }
+
+        h2 {
+            margin: 0.6rem 0;
+            font-size: 2.1rem;
+            color: #c2185b;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+        }
+
+        p {
+            margin: 0.9rem 0;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #880e4f;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            width: 100%;
+            height: 100%;
+        }
+
+        .layout-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .large-img {
+            max-height: 75%;
+        }
+
+        /* Last page back is plain */
+        .page:last-child .back {
+            background-image: none;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="book">
+        <!-- Page 1: Cover -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Valentine Cover">
+                <h2>My Valentine's Story</h2>
+                <p>For you, my love ♡</p>
+            </div>
+            <div class="back">
+                <img src="bg.jpg" alt="Love Letter">
+                <h2>Dearest, NAME</h2>
+                <p>Every beat of my heart whispers your name. Happy Valentine's Day! 💕</p>
+            </div>
+        </div>
+
+        <!-- Page 2: 3 pics + notes -->
+        <div class="page">
+            <div class="front">
+                <div class="layout-grid">
+                    <div class="layout-item"><img class="large-img" src="bg.jpg" alt="Couple 1"></div>
+                    <div class="layout-item">
+                        <p>Our first meeting was magical ♡</p>
+                    </div>
+                    <div class="layout-item">
+                        <p>You make every day brighter.</p>
+                    </div>
+                    <div class="layout-item"><img class="large-img" src="bg.jpg" alt="Couple 2"></div>
+                    <div class="layout-item"><img class="large-img" src="bg.jpg" alt="Couple 3"></div>
+                    <div class="layout-item">
+                        <p>Forever yours.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <h2>Our Moments</h2>
+                <p>Can't wait for more ♡</p>
+                <img src="bg.jpg" alt="Romantic Couple">
+            </div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Love Note">
+                <h2>My Heart Belongs To You</h2>
+                <p>You hold it forever ♡</p>
+            </div>
+            <div class="back">
+                <h2>Sweet Thoughts</h2>
+                <p>You're always on my mind.</p>
+                <img src="bg.jpg" alt="Cute Note">
+            </div>
+        </div>
+
+        <!-- Page 4 -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Couple Date">
+                <h2>Our Journey</h2>
+                <p>Every step feels like home with you.</p>
+            </div>
+            <div class="back">
+                <h2>Love Notes</h2>
+                <p>I fall for you more every day.</p>
+            </div>
+        </div>
+
+        <!-- Page 5 - New -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Pink Hearts">
+                <h2>You & Me</h2>
+                <p>The best team ever ♡</p>
+            </div>
+            <div class="back">
+                <h2>Little Things</h2>
+                <p>Your laugh is my favorite sound.</p>
+            </div>
+        </div>
+
+        <!-- Page 6 - New -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Couple Hug">
+                <h2>Always & Forever</h2>
+                <p>No matter what comes our way.</p>
+            </div>
+            <div class="back">
+                <h2>Promise</h2>
+                <p>I'll choose you every single day.</p>
+            </div>
+        </div>
+
+        <!-- Page 7 - New cute cat GIF instead of video -->
+        <div class="page">
+            <div class="front">
+                <h2>Just Because You're Cute</h2>
+                <p>Like this little one ♡</p>
+                <img class="gif"
+                    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3N3bGZzZTRvMnU0Z2h5ajFpZXl6dGJ2amhtOHFhdDV0NGRucGpvYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TjSPQgowhhJdHgvnwA/giphy.gif.gif"
+                    alt="Cute dancing cat GIF">
+                <p>Me when I think of you~ 🐾💕</p>
+            </div>
+            <div class="back">
+                <h2>Happy Vibes Only</h2>
+                <p>You bring out my happiest self.</p>
+            </div>
+        </div>
+
+        <!-- Page 8 - New -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Heart Explosion">
+                <h2>You're My Everything</h2>
+                <p>My love, my best friend, my home ♡</p>
+            </div>
+            <div class="back">
+                <h2>More To Come</h2>
+                <p>Can't wait for our next chapter.</p>
+            </div>
+        </div>
+
+        <!-- Page 9 - New -->
+        <div class="page">
+            <div class="front">
+                <img src="bg.jpg" alt="Love Letter">
+                <h2>From My Heart To Yours</h2>
+                <p>Thank you for being you.</p>
+            </div>
+            <div class="back">
+                <h2>Always Here</h2>
+                <p>Right beside you, forever.</p>
+            </div>
+        </div>
+
+        <!-- Page 10: Final Note -->
+        <div class="page">
+            <div class="front">
+                <h2>Happy Valentine's Day, NAME!</h2>
+                <p>I love you more than words can say ♡♡♡</p>
+                <img src="bg.jpg" alt="My Love Note">
+            </div>
+            <div class="back">
+                <!-- Plain white -->
+                <p>With all my love... 💕</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const flipBook = (elBook) => {
+            elBook.style.setProperty("--c", 0);
+            elBook.querySelectorAll(".page").forEach(
+                (page, idx) => {
+                    page.style.setProperty("--i", idx);
+                    page.addEventListener("click", (evt) => {
+                        const isBack = evt.target.closest(".back");
+                        const curr = isBack ? idx : idx + 1;
+                        const maxPage = elBook.querySelectorAll(".page").length;
+                        if (curr >= 0 && curr <= maxPage) {
+                            elBook.style.setProperty("--c", curr);
+                        }
+                    });
+                }
+            );
+        };
+        document.querySelectorAll(".book").forEach(flipBook);
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js")
+                .then(() => console.log("PWA ready"))
+                .catch(err => console.log(err));
+        }
+    </script>
+
+</body>
+
+</html>
