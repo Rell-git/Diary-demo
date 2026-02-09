@@ -1,10 +1,11 @@
 {
   "name": "Our Diary",
-  "short_name": "Diary",
+  "short_name": "diary",
   "start_url": ".",
-  "display": "standalone",
-  "background_color": "#ffb6c1",
-  "theme_color": "#c2185b",
+  "display": "fullscreen",
+  "background_color": "#faf8f5",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
